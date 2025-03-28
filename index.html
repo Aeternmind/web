@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Aeternmind es un proyecto tecnológico y de investigación que impulsa iniciativas en bienestar, educación y tecnología.">
+    <title>Aeternmind - Tecnología e Investigación</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/swiper@7/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset general para eliminar espacios no deseados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Header fijo */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3.4rem;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 50;
+        }
+
+        /* Menú móvil */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 3.4rem;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 40;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Carrusel ajustado */
+        .swiper-container {
+            width: 100%;
+            height: 70vh;
+            max-height: 650px;
+            min-height: 650px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .swiper-wrapper {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0;
+            padding: 0;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Controles de navegación ajustados */
+        .swiper-button-prev,
+        .swiper-button-next {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            color: #000;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: 0;
+        }
+        .swiper-button-prev {
+            left: 10px;
+            right: auto;
+        }
+        .swiper-button-next {
+            right: 10px;
+            left: auto;
+        }
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            font-size: 20px;
+        }
+
+        /* Espacio para el header */
+        .header-space {
+            height: 3.4rem;
+        }
+
+        /* Estilos de tarjetas */
+        .blog-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive */
+        @media (min-width: 769px) {
+            .mobile-menu-button {
+                display: none !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .mobile-menu-button {
+                display: block;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Header -->
+    <header>
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center h-full">
+            <div class="text-xl">Aeternmind:::</div>
+            <button class="mobile-menu-button hidden md:hidden" aria-label="Toggle menu" id="menuToggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <nav class="hidden md:block" aria-label="Main navigation">
+                <ul class="flex space-x-4">
+                    <li><a href="tap_com.html" class="text-sm hover:text-gray-600">#theathleteproject</a></li>
+                    <li><a href="#" class="text-sm hover:text-blue-600">Lab</a></li>
+                    <li><a href="#" class="text-sm hover:text-green-600">Liber:</a></li>
+                    <li><a href="#" class="text-sm hover:text-purple-600">Tauri:</a></li>
+                    <li><a href="#" class="text-sm hover:text-blue-600">Opentribe:</a></li>
+                    <li><a href="#blog" class="text-sm hover:text-blue-600">Blog</a></li>
+                    <li><a href="#contact" class="text-sm hover:text-green-600">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Menú móvil -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="space-y-2">
+                <li><a href="tap_com.html" class="text-sm hover:text-gray-600 block py-2 px-4">#theathleteproject</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-600 block py-2 px-4">Lab</a></li>
+                <li><a href="#" class="text-sm hover:text-green-600 block py-2 px-4">Liber:</a></li>
+                <li><a href="#" class="text-sm hover:text-purple-600 block py-2 px-4">Tauri:</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-600 block py-2 px-4">Opentribe:</a></li>
+                <li><a href="#blog" class="text-sm hover:text-blue-600 block py-2 px-4">Blog</a></li>
+                <li><a href="#contact" class="text-sm hover:text-green-600 block py-2 px-4">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Espacio para el header -->
+    <div class="header-space"></div>
+
+    <!-- Contenido principal -->
+    <main class="w-full overflow-hidden">
+        <!-- Carrusel ajustado -->
+        <section class="w-full" aria-label="Image carousel">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="images/ima.png" alt="Aeternmind project presentation">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/ima2.jpg" alt="Technology and research lab">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/ima4.jpg" alt="Innovative projects showcase">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/ima5.jpg" alt="Innovative projects showcase">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/ima3.jpg" alt="Innovative projects showcase">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/ima6.png" alt="Innovative projects showcase">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
+
+        <!-- Sección Simple -->
+        <section class="container mx-auto px-4 mb-16 mt-8">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold mb-6">This is Aeternmind</h1>
+                <p class="max-w-2xl mx-auto text-xl text-gray-700">
+                    Aeternmind ::: is a technology and research-based project that drives initiatives in wellness, education, and technology through laboratories and innovative projects.
+                </p>
+            </div>
+        </section>
+
+        <!-- Sección Doble -->
+        <section class="container mx-auto px-4 mb-16">
+            <div class="grid md:grid-cols-2 gap-8">
+                <article class="bg-white p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
+                    <p class="text-gray-700">
+                        Detailed content for the first column. You can include information about services, features or benefits.
+                    </p>
+                </article>
+                <article class="bg-white p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Our Vision</h2>
+                    <p class="text-gray-700">
+                        Detailed content for the second column. A complementary description to the first column.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sección de Blogs -->
+        <section id="blog" class="container mx-auto px-4 mb-16">
+            <h2 class="text-3xl font-bold text-center mb-10">Latest Blogs</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="blog-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4">Blog Post 1</h3>
+                    <p class="text-gray-700 mb-4">
+                        Brief description of the first blog post. An interesting summary that invites to read more.
+                    </p>
+                    <a href="#" class="text-green-600 hover:underline" aria-label="Read more about Blog Post 1">Read more</a>
+                </article>
+                <article class="blog-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4">Blog Post 2</h3>
+                    <p class="text-gray-700 mb-4">
+                        Brief description of the second blog post. Capturing the reader's attention.
+                    </p>
+                    <a href="#" class="text-purple-600 hover:underline" aria-label="Read more about Blog Post 2">Read more</a>
+                </article>
+                <article class="blog-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4">Blog Post 3</h3>
+                    <p class="text-gray-700 mb-4">
+                        Brief description of the third blog post. Showing content diversity.
+                    </p>
+                    <a href="#" class="text-blue-600 hover:underline" aria-label="Read more about Blog Post 3">Read more</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black text-white py-8 w-full">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-base font-bold mb-4">Project:::</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm hover:text-gray-400">About Us</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Careers</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Press</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Partners</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-base font-bold mb-4">Services:::</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm hover:text-gray-400">Product 1</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Product 2</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Product 3</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-base font-bold mb-4">Resources:::</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#blog" class="text-sm hover:text-gray-400">Blog</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Documentation</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Support</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Bootstrap</a></li>
+                        <li><a href="#" class="text-sm hover:text-gray-400">Pay</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-base font-bold mb-4">Contact:::</h4>
+                    <address class="not-italic">
+                        <p class="text-sm">Email: <a href="mailto:aeternmind@gmail.com" class="hover:text-gray-400">aeternmind@gmail.com</a></p>
+                        <p class="text-sm">Whatsapp: <a href="https://wa.me/573042973052" class="hover:text-gray-400">+57 (304) 297-3052</a></p>
+                        <p class="text-sm">Whatsapp Channel: Aeternmind</p>
+                    </address>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-sm hover:text-gray-400" aria-label="Twitter">X</a>
+                        <a href="#" class="text-sm hover:text-gray-400" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" class="text-sm hover:text-gray-400" aria-label="GitHub">GitHub</a>
+                        <a href="#" class="text-sm hover:text-gray-400" aria-label="Instagram">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8 border-t border-gray-800 pt-6">
+                <p class="text-sm">&copy; 2025 Aeternmind::: South America/Bogota, Colombia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar Swiper con ajustes para evitar espacios
+            const swiper = new Swiper('.swiper-container', {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                loop: true,
+                centeredSlides: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                on: {
+                    init: function() {
+                        this.updateSize();
+                        this.updateSlides();
+                    },
+                    resize: function() {
+                        this.updateSize();
+                        this.updateSlides();
+                    }
+                }
+            });
+
+            // Menú móvil
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const svgIcon = menuToggle.querySelector('svg');
+            const defaultIcon = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            const closeIcon = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    svgIcon.innerHTML = mobileMenu.classList.contains('active') ? closeIcon : defaultIcon;
+                });
+                
+                // Cerrar menú al hacer clic en enlace
+                document.querySelectorAll('#mobileMenu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        svgIcon.innerHTML = defaultIcon;
+                    });
+                });
+            }
+
+            // Forzar recálculo de tamaños después de cargar imágenes
+            window.addEventListener('load', function() {
+                swiper.updateSize();
+                swiper.updateSlides();
+            });
+        });
+    </script>
+</body>
+</html>
